@@ -3,8 +3,8 @@ use std::{collections::HashMap, iter::zip};
 use aoc_runner_derive::aoc;
 
 #[aoc(day1, part1)]
-fn day1p1(input: &str) -> isize {
-    let (mut first, mut second) = parse_d1(input);
+fn part1(input: &str) -> isize {
+    let (mut first, mut second) = parse(input);
 
     first.sort();
     second.sort();
@@ -14,8 +14,8 @@ fn day1p1(input: &str) -> isize {
 }
 
 #[aoc(day1, part2)]
-fn day1p2(input: &str) -> isize {
-    let (first, second) = parse_d1(input);
+fn part2(input: &str) -> isize {
+    let (first, second) = parse(input);
 
     let counts = second.iter().fold(HashMap::new(), |mut acc, val| {
         let count = acc.entry(val).or_insert(0);
@@ -30,7 +30,7 @@ fn day1p2(input: &str) -> isize {
     })
 }
 
-fn parse_d1(input: &str) -> (Vec<isize>, Vec<isize>) {
+fn parse(input: &str) -> (Vec<isize>, Vec<isize>) {
     input
         .split('\n')
         .fold((vec![], vec![]), |(mut first, mut second), line| {
@@ -62,12 +62,12 @@ mod tests {
     #[test]
     fn part1_sample() {
         let input = read_input("input/2024/sample/day1.txt");
-        assert_eq!(day1p1(&input), 11);
+        assert_eq!(part1(&input), 11);
     }
 
     #[test]
     fn part2_sample() {
         let input = read_input("input/2024/sample/day1.txt");
-        assert_eq!(day1p2(&input), 31);
+        assert_eq!(part2(&input), 31);
     }
 }
