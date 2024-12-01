@@ -6,6 +6,7 @@ mod day1;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
+/// ✨CLI program that runs solutions to AOC '24 ✨
 struct Args {
     /// The day to run; if 0 is given, all days are run.
     #[arg(short, long, default_value_t = 0)]
