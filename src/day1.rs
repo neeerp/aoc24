@@ -34,15 +34,12 @@ fn parse(input: &str) -> (Vec<isize>, Vec<isize>) {
     input
         .split('\n')
         .fold((vec![], vec![]), |(mut first, mut second), line| {
-            let parts: Vec<&str> = line.split_whitespace().collect();
-            match parts[..] {
-                [a, b] => {
-                    first.push(a.parse().unwrap());
-                    second.push(b.parse().unwrap());
-                    (first, second)
-                }
-                _ => (first, second),
+            let parts = line.split_once("   ");
+            if let Some((a, b)) = parts {
+                first.push(a.parse().unwrap());
+                second.push(b.parse().unwrap());
             }
+            (first, second)
         })
 }
 
