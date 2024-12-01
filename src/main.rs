@@ -1,7 +1,8 @@
 use std::{fs, iter::zip};
 
 fn main() {
-    todo!("Implement a main function, I guess?");
+    let day1p1_result = day1p1(read_input("inputs/day1p1_input.txt"));
+    println!("The result for day 1 part 1 is: {}", day1p1_result);
 }
 
 fn day1p1(input: String) -> isize {
@@ -36,5 +37,11 @@ mod tests {
     fn it_works_on_d1p1_sample() {
         let input = read_input("inputs/day1p1_sample.txt");
         assert_eq!(day1p1(input), 11);
+    }
+
+    #[test]
+    fn it_works_on_d1p1_actual() {
+        let input = read_input("inputs/day1p1_input.txt");
+        assert_eq!(day1p1(input), 2756096);
     }
 }
