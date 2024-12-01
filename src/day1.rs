@@ -38,7 +38,7 @@ fn parse_d1(input: &str) -> (Vec<isize>, Vec<isize>) {
     input
         .split('\n')
         .fold((vec![], vec![]), |(mut first, mut second), line| {
-            let parts: Vec<&str> = line.split("   ").collect();
+            let parts: Vec<&str> = line.split_whitespace().collect();
             match parts[..] {
                 [a, b] => {
                     first.push(a.parse().unwrap());
