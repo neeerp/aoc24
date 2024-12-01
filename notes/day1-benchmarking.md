@@ -23,13 +23,15 @@ In both parts, the parsing function takes a significant portion of the run time.
       [section](https://doc.rust-lang.org/book/ch13-04-performance.html) of the
       Rust Book!
 
+- (DIDN'T WORK) Use parallelism (via Rayon)
+    - Was worth a shot, but the task is probably too small for this. The
+      performance is orders of magnitude worse.
+
 
 ## Part 2 Optimizations
 - (MAJOR) Using i32 instead of isize
     - I noticed this was improving part 2 by quite a bit, while not affecting
       part 1/parsing performance at all. I guess the hash function performs
       better on smaller values?
-        - I wonder if I should try `i32`, though I'm worried about what the
-          codspeed run will pass as input (we're boned if it's 32 bit ints). I
-          should maybe open a github issue to ask?
-
+        - I thought about trying i16 but it looks like the inputs can be much
+          larger than the 16 bit max.
