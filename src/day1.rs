@@ -32,7 +32,7 @@ pub fn part2(input: &str) -> isize {
 
 fn parse(input: &str) -> (Vec<isize>, Vec<isize>) {
     input
-        .lines()
+        .split('\n')
         .fold((vec![], vec![]), |(mut first, mut second), line| {
             let parts: Vec<&str> = line.split_whitespace().collect();
             match parts[..] {
@@ -41,7 +41,7 @@ fn parse(input: &str) -> (Vec<isize>, Vec<isize>) {
                     second.push(b.parse().unwrap());
                     (first, second)
                 }
-                _ => panic!("Oops!"),
+                _ => (first, second),
             }
         })
 }
