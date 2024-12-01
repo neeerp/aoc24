@@ -27,6 +27,13 @@ In both parts, the parsing function takes a significant portion of the run time.
     - Was worth a shot, but the task is probably too small for this. The
       performance is orders of magnitude worse.
 
+- (DIDN'T WORK) Use sort_unstable instead of sort
+    - I'm kinda surprised about this one!
+
+- (DIDN'T WORK) Use `itertools`'s `sorted`
+    - I thought that an out-of-place sort might be faster than an in-place
+      sort... doesn't seem to be the case. In fact, in the flame graph I can
+      see it's making the same calls to `driftsort`.
 
 ## Part 2 Optimizations
 - (MAJOR) Using i32 instead of isize
