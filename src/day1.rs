@@ -35,21 +35,26 @@ fn day1p2(input: &str) -> isize {
 }
 
 fn parse_d1(input: &str) -> (Vec<isize>, Vec<isize>) {
-    input.split('\n').fold((vec![], vec![]), |(mut first, mut second), line| {
-        let parts: Vec<&str> = line.split("   ").collect();
-        match parts[..] {
-            [a, b] => {
-                first.push(a.parse().unwrap());
-                second.push(b.parse().unwrap());
-                (first, second)
+    input
+        .split('\n')
+        .fold((vec![], vec![]), |(mut first, mut second), line| {
+            let parts: Vec<&str> = line.split("   ").collect();
+            match parts[..] {
+                [a, b] => {
+                    first.push(a.parse().unwrap());
+                    second.push(b.parse().unwrap());
+                    (first, second)
+                }
+                _ => panic!("Oops!"),
             }
-            _ => panic!("Oops!")
-        }
-    })
+        })
 }
 
 fn read_input(file_name: &str) -> String {
-    fs::read_to_string(file_name).expect("Unable to read input!").trim().to_string()
+    fs::read_to_string(file_name)
+        .expect("Unable to read input!")
+        .trim()
+        .to_string()
 }
 
 #[cfg(test)]
@@ -78,6 +83,5 @@ mod tests {
     fn part2_actual() {
         let input = read_input("inputs/day1_input.txt");
         assert_eq!(day1p2(&input), 23117829);
-
     }
 }

@@ -15,14 +15,11 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-
     match args.day {
         0 => run_all(),
         1 => run_day1(),
-        _ => todo!("Day {} is not upon us yet!", args.day)
+        _ => todo!("Day {} is not upon us yet!", args.day),
     }
-
-
 }
 
 fn run_all() {
