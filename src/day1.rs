@@ -3,7 +3,7 @@ use std::{collections::HashMap, iter::zip};
 use aoc_runner_derive::aoc;
 
 #[aoc(day1, part1)]
-fn part1(input: &str) -> isize {
+pub fn part1(input: &str) -> isize {
     let (mut first, mut second) = parse(input);
 
     first.sort();
@@ -14,7 +14,7 @@ fn part1(input: &str) -> isize {
 }
 
 #[aoc(day1, part2)]
-fn part2(input: &str) -> isize {
+pub fn part2(input: &str) -> isize {
     let (first, second) = parse(input);
 
     let counts = second.iter().fold(HashMap::new(), |mut acc, val| {
