@@ -18,6 +18,12 @@ In both parts, the parsing function takes a significant portion of the run time.
       `RawVec::grow_one()`. Allocating the vectors with a starting capacity of
       1000 (exact size of the input) eliminates these calls!
 
+- (DIDN'T WORK) Use a for loop when parsing
+    - This was somewhat surprising, but it's in line with this 
+      [section](https://doc.rust-lang.org/book/ch13-04-performance.html) of the
+      Rust Book!
+
+
 ## Part 2 Optimizations
 - (MAJOR) Using i32 instead of isize
     - I noticed this was improving part 2 by quite a bit, while not affecting

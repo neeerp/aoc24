@@ -34,7 +34,6 @@ fn parse(input: &str) -> (Vec<i32>, Vec<i32>) {
     input.split('\n').fold(
         (Vec::with_capacity(1000), Vec::with_capacity(1000)),
         |(mut first, mut second), line| {
-            // .fold((vec![], vec![]), |(mut first, mut second), line| {
             let parts = line.split_once("   ");
             if let Some((a, b)) = parts {
                 first.push(a.parse().unwrap());
