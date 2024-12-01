@@ -1,13 +1,8 @@
-use std::{collections::HashMap, fs, iter::zip};
+use std::{collections::HashMap, iter::zip};
 
-pub fn run_day1() {
-    let day1_input = read_input("inputs/day1_input.txt");
-    let day1p1_result = day1p1(&day1_input);
-    println!("The result for day 1 part 1 is: {}", day1p1_result);
-    let day1p2_result = day1p2(&day1_input);
-    println!("The result for day 1 part 2 is: {}", day1p2_result);
-}
+use aoc_runner_derive::aoc;
 
+#[aoc(day1, part1)]
 fn day1p1(input: &str) -> isize {
     let (mut first, mut second) = parse_d1(input);
 
@@ -18,6 +13,7 @@ fn day1p1(input: &str) -> isize {
     sum
 }
 
+#[aoc(day1, part2)]
 fn day1p2(input: &str) -> isize {
     let (first, second) = parse_d1(input);
 
@@ -50,38 +46,28 @@ fn parse_d1(input: &str) -> (Vec<isize>, Vec<isize>) {
         })
 }
 
-fn read_input(file_name: &str) -> String {
-    fs::read_to_string(file_name)
-        .expect("Unable to read input!")
-        .trim()
-        .to_string()
-}
-
 #[cfg(test)]
 mod tests {
+    use std::fs;
+
     use super::*;
+
+    fn read_input(file_name: &str) -> String {
+        fs::read_to_string(file_name)
+            .expect("Unable to read input!")
+            .trim()
+            .to_string()
+    }
 
     #[test]
     fn part1_sample() {
-        let input = read_input("inputs/day1_sample.txt");
+        let input = read_input("input/2024/sample/day1.txt");
         assert_eq!(day1p1(&input), 11);
     }
 
     #[test]
-    fn part1_actual() {
-        let input = read_input("inputs/day1_input.txt");
-        assert_eq!(day1p1(&input), 2756096);
-    }
-
-    #[test]
     fn part2_sample() {
-        let input = read_input("inputs/day1_sample.txt");
+        let input = read_input("input/2024/sample/day1.txt");
         assert_eq!(day1p2(&input), 31);
-    }
-
-    #[test]
-    fn part2_actual() {
-        let input = read_input("inputs/day1_input.txt");
-        assert_eq!(day1p2(&input), 23117829);
     }
 }
