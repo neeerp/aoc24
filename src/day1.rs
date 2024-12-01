@@ -3,18 +3,18 @@ use std::{collections::HashMap, iter::zip};
 use aoc_runner_derive::aoc;
 
 #[aoc(day1, part1)]
-pub fn part1(input: &str) -> isize {
+pub fn part1(input: &str) -> i32 {
     let (mut first, mut second) = parse(input);
 
     first.sort();
     second.sort();
 
-    let sum: isize = zip(first, second).map(|(a, b)| (a - b).abs()).sum();
+    let sum: i32 = zip(first, second).map(|(a, b)| (a - b).abs()).sum();
     sum
 }
 
 #[aoc(day1, part2)]
-pub fn part2(input: &str) -> isize {
+pub fn part2(input: &str) -> i32 {
     let (first, second) = parse(input);
 
     let counts = second.iter().fold(HashMap::new(), |mut acc, val| {
@@ -30,7 +30,7 @@ pub fn part2(input: &str) -> isize {
     })
 }
 
-fn parse(input: &str) -> (Vec<isize>, Vec<isize>) {
+fn parse(input: &str) -> (Vec<i32>, Vec<i32>) {
     input
         .split('\n')
         .fold((vec![], vec![]), |(mut first, mut second), line| {
