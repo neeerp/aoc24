@@ -1,3 +1,6 @@
 /target
 *.svg
 perf.*
+
+input/2024/*
+!input/2024/sample/
