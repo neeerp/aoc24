@@ -1,25 +1,29 @@
 use aoc_runner_derive::aoc;
 
 #[aoc(day2, part1)]
-pub fn part1(input: &str) -> i32 {
-    input.lines().map(parse_line).sum()
+pub fn part1(input: &str) -> u32 {
+    let records = parse(input);
+    records.iter().map(|nums| {
+        if is_valid(nums) {
+            1
+        } else {
+            0
+        }
+    }).sum()
 }
 
-pub fn parse_line(line: &str) -> i32 {
-    let parts = line.split(' ').map(|c| c.parse().unwrap()).collect();
-    if is_valid(parts) {
-        1
-    } else {
-        0
-    }
+pub fn parse(input: &str) -> Vec<Vec<i8>> {
+    input.lines().map(|line| {
+        line.split(' ').map(|c| c.parse().unwrap()).collect()
+    }).collect()
 }
 
-pub fn is_valid(parts: Vec<i32>) -> bool {
-    let asc = parts[0] < parts[1];
+pub fn is_valid(nums: &[i8]) -> bool {
+    let asc = nums[0] < nums[1];
 
-    parts
+    nums
         .iter()
-        .zip(parts.iter().skip(1))
+        .zip(nums.iter().skip(1))
         .fold(true, |valid, (left, right)| {
             let mono_step = left < right && asc || (left > right && !asc);
             let dist = (left - right).abs();
