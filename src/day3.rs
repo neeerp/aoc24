@@ -12,6 +12,25 @@ pub fn part1(input: &str) -> i32 {
         })
 }
 
+#[aoc(day3, part2)]
+pub fn part2(input: &str) -> i32 {
+    // TIL:
+    // - The (.*?) group is a LAZY match; it causes the regex engine to find the SHORTEST match.
+    // Otherwise, the greedy (.*) will find the LONGEST match that satisfies the rest of the
+    // expression.
+    //
+    // - '.' does NOT match '\n's! To make it match '\n' as well, I added the (?s) flag at
+    // the start of the regex.
+    //
+    // - Prefixing a group with '?:' makes it a non-capture group
+    let segments_re = Regex::new(r"(?s)(?:^|do\(\))(.*?)(?:don't\(\)|$)").unwrap();
+
+    segments_re
+        .captures_iter(input)
+        .map(|c| c.extract())
+        .fold(0, |sum, (_, [segment])| sum + part1(segment))
+}
+
 #[cfg(test)]
 mod tests {
     use std::fs;
@@ -29,5 +48,17 @@ mod tests {
     fn part1_sample() {
         let input = read_input("input/2024/sample/day3.txt");
         assert_eq!(part1(&input), 161);
+    }
+
+    #[test]
+    fn part2_sample_on_p1() {
+        let input = read_input("input/2024/sample/day3.txt");
+        assert_eq!(part2(&input), 161);
+    }
+
+    #[test]
+    fn part2_sample() {
+        let input = read_input("input/2024/sample/day3p2.txt");
+        assert_eq!(part2(&input), 48);
     }
 }
