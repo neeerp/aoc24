@@ -8,11 +8,31 @@ pub fn part1(input: &str) -> u32 {
         .collect();
 
     (0..grid.len())
-        .map(|i| (0..grid[0].len()).map(|j| find(i, j, &grid)).sum::<u32>())
+        .map(|i| {
+            (0..grid[0].len())
+                .map(|j| find_xmas(i, j, &grid))
+                .sum::<u32>()
+        })
         .sum()
 }
 
-pub fn find(i: usize, j: usize, grid: &[Vec<char>]) -> u32 {
+#[aoc(day4, part2)]
+pub fn part2(input: &str) -> u32 {
+    let grid: Vec<Vec<char>> = input
+        .lines()
+        .map(|line| line.chars().collect::<Vec<char>>())
+        .collect();
+
+    (0..grid.len())
+        .map(|i| {
+            (0..grid[0].len())
+                .map(|j| find_mas(i, j, &grid))
+                .sum::<u32>()
+        })
+        .sum()
+}
+
+pub fn find_xmas(i: usize, j: usize, grid: &[Vec<char>]) -> u32 {
     if grid[i][j] != 'X' {
         return 0;
     }
@@ -76,6 +96,39 @@ pub fn find(i: usize, j: usize, grid: &[Vec<char>]) -> u32 {
     count
 }
 
+pub fn find_mas(i: usize, j: usize, grid: &[Vec<char>]) -> u32 {
+    let m = grid.len();
+    let n = grid[0].len();
+
+    if grid[i][j] != 'A' {
+        return 0;
+    }
+
+    if i == 0 || i == m - 1 || j == 0 || j == n - 1 {
+        return 0;
+    }
+
+    // M -|S -
+    //  A | A
+    // - S|- M
+    if !((grid[i - 1][j - 1] == 'M' && grid[i + 1][j + 1] == 'S')
+        || (grid[i - 1][j - 1] == 'S' && grid[i + 1][j + 1] == 'M'))
+    {
+        return 0;
+    }
+
+    // - S|- M
+    //  A | A
+    // M -|S -
+    if !((grid[i + 1][j - 1] == 'M' && grid[i - 1][j + 1] == 'S')
+        || (grid[i + 1][j - 1] == 'S' && grid[i - 1][j + 1] == 'M'))
+    {
+        return 0;
+    }
+
+    1
+}
+
 #[cfg(test)]
 mod tests {
     use std::fs;
@@ -93,5 +146,11 @@ mod tests {
     fn part1_sample() {
         let input = read_input("input/2024/sample/day4.txt");
         assert_eq!(part1(&input), 18);
+    }
+
+    #[test]
+    fn part2_sample() {
+        let input = read_input("input/2024/sample/day4.txt");
+        assert_eq!(part2(&input), 9);
     }
 }
